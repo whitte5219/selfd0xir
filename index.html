@@ -7,18 +7,25 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Exo+2:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Space Background -->
-    <div class="space-background"></div>
+    <!-- Animated Space Background -->
+    <div class="stars"></div>
+    <div class="stars2"></div>
+    <div class="stars3"></div>
+    <div class="planet"></div>
+    <div class="planet2"></div>
     
     <!-- Main Container -->
     <div class="container">
         <!-- Initial Screen -->
         <div id="initialScreen" class="screen active">
             <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-user-astronaut"></i>
+                </div>
                 <h1 class="main-title">Self<span class="highlight">Doxxer</span></h1>
                 <h2 class="subtitle">Dox yourself or get doxxed, that's what we call nonsense</h2>
             </div>
@@ -26,6 +33,7 @@
             <button id="doxButton" class="dox-button">
                 <span class="button-text">dox yourself</span>
                 <span class="button-icon"><i class="fas fa-satellite"></i></span>
+                <div class="button-glow"></div>
             </button>
             
             <div class="warning">
@@ -37,17 +45,25 @@
         <!-- Results Screen -->
         <div id="resultsScreen" class="screen">
             <div class="results-header">
-                <h1><i class="fas fa-satellite"></i> DOXXING REPORT</h1>
+                <div class="scan-animation">
+                    <div class="scan-circle"></div>
+                    <div class="scan-ring"></div>
+                    <div class="scan-ring2"></div>
+                </div>
+                <h1><i class="fas fa-satellite-dish"></i> DOXXING REPORT</h1>
                 <p class="scan-status">Scanning complete</p>
+                <div class="scan-line"></div>
             </div>
             
             <div class="doxxing-board">
                 <div class="info-grid">
                     <!-- Left Column -->
                     <div class="info-column">
-                        <div class="info-card">
+                        <div class="info-card" data-card="1">
                             <div class="card-header">
-                                <i class="fas fa-network-wired"></i>
+                                <div class="card-icon">
+                                    <i class="fas fa-network-wired"></i>
+                                </div>
                                 <h3>NETWORK</h3>
                             </div>
                             <div class="card-content">
@@ -60,15 +76,17 @@
                                     <span id="connectionType" class="info-value">Checking...</span>
                                 </div>
                                 <div class="info-item">
-                                    <span class="info-label">Online:</span>
+                                    <span class="info-label">Online Status:</span>
                                     <span id="onlineStatus" class="info-value">Checking...</span>
                                 </div>
                             </div>
                         </div>
                         
-                        <div class="info-card">
+                        <div class="info-card" data-card="2">
                             <div class="card-header">
-                                <i class="fas fa-desktop"></i>
+                                <div class="card-icon">
+                                    <i class="fas fa-desktop"></i>
+                                </div>
                                 <h3>SYSTEM</h3>
                             </div>
                             <div class="card-content">
@@ -90,9 +108,11 @@
                     
                     <!-- Right Column -->
                     <div class="info-column">
-                        <div class="info-card">
+                        <div class="info-card" data-card="3">
                             <div class="card-header">
-                                <i class="fas fa-map-marker-alt"></i>
+                                <div class="card-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
                                 <h3>LOCATION</h3>
                             </div>
                             <div class="card-content">
@@ -111,9 +131,11 @@
                             </div>
                         </div>
                         
-                        <div class="info-card">
+                        <div class="info-card" data-card="4">
                             <div class="card-header">
-                                <i class="fas fa-info-circle"></i>
+                                <div class="card-icon">
+                                    <i class="fas fa-info-circle"></i>
+                                </div>
                                 <h3>BROWSER</h3>
                             </div>
                             <div class="card-content">
@@ -136,6 +158,26 @@
                 
                 <div class="final-message">
                     <p>This is a demonstration of what websites can typically access. No real doxxing occurred.</p>
+                </div>
+                
+                <!-- Joke Leak Button -->
+                <div class="leak-section">
+                    <button id="leakButton" class="leak-button">
+                        <span class="button-text">send to doxbin and leak your data</span>
+                        <span class="button-icon"><i class="fas fa-paper-plane"></i></span>
+                    </button>
+                    <div id="leakStatus" class="leak-status">
+                        <div class="leak-loader">
+                            <div class="leak-dot"></div>
+                            <div class="leak-dot"></div>
+                            <div class="leak-dot"></div>
+                        </div>
+                        <span class="leak-message">Sending data to public servers...</span>
+                    </div>
+                    <div id="leakSuccess" class="leak-success">
+                        <i class="fas fa-check-circle"></i>
+                        <span class="success-message">Your data was successfully leaked to the public, thanks for sharing it</span>
+                    </div>
                 </div>
                 
                 <div class="action-buttons">
