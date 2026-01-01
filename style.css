@@ -38,6 +38,7 @@ body {
     text-shadow: 0 0 8px rgba(209, 209, 224, 0.7);
     opacity: 0;
     transform: translateY(20px);
+    animation: fadeInUp 0.6s ease forwards;
 }
 
 .subtitle {
@@ -46,6 +47,7 @@ body {
     color: #a0a0b0;
     opacity: 0;
     transform: translateY(20px);
+    animation: fadeInUp 0.6s ease 0.1s forwards;
 }
 
 .dox-button {
@@ -56,9 +58,9 @@ body {
     border: 1px solid #4a4a7a;
     border-radius: 4px;
     cursor: pointer;
-    transition: all 0.3s ease;
     opacity: 0;
     transform: translateY(20px);
+    animation: fadeInUp 0.6s ease 0.2s forwards;
 }
 
 .dox-button:hover {
@@ -73,7 +75,7 @@ body {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.95);
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -103,12 +105,11 @@ body {
 }
 
 .dox-result {
+    display: none;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    opacity: 0;
-    transition: opacity 0.5s ease;
 }
 
 .dox-card {
@@ -121,12 +122,6 @@ body {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
 }
 
-.data-field {
-    opacity: 0;
-    transform: translateY(20px);
-    margin: 8px 0;
-}
-
 .back-button {
     margin-top: 20px;
     padding: 10px 20px;
@@ -135,7 +130,6 @@ body {
     border: 1px solid #4a4a7a;
     border-radius: 4px;
     cursor: pointer;
-    transition: all 0.3s ease;
 }
 
 .back-button:hover {
@@ -153,10 +147,11 @@ body {
     color: #7a7a9a;
     opacity: 0;
     transform: translateY(20px);
+    animation: fadeInUp 0.6s ease 0.3s forwards;
 }
 
-.animated {
-    animation: fadeInUp 0.6s ease forwards;
+.hidden {
+    display: none;
 }
 
 @keyframes fadeInUp {
@@ -164,8 +159,4 @@ body {
         opacity: 1;
         transform: translateY(0);
     }
-}
-
-.hidden {
-    display: none;
 }
