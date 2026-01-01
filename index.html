@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SelfDoxxer</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background"></div>
+    <div class="container">
+        <h1 class="title">SelfDoxxer</h1>
+        <p class="subtitle">Dox yourself or get doxxed, that's what we call nonsense</p>
+        <button id="doxButton" class="dox-button">Dox Yourself</button>
+        <div id="scanner" class="scanner hidden">
+            <div class="scanner-line"></div>
+            <p class="scanning-text">SCANNING...</p>
+        </div>
+        <div id="doxResult" class="dox-result hidden">
+            <div class="dox-card">
+                <h2>🚨 Your "Doxxed" Data 🚨</h2>
+                <p><strong>IP Address:</strong> <span id="ip">192.168.xxx.xxx</span></p>
+                <p><strong>Geolocation:</strong> <span id="location">Orbiting Jupiter’s 4th Moon</span></p>
+                <p><strong>Browser:</strong> <span id="browser">Interstellar Chrome v9001</span></p>
+                <p><strong>Device:</strong> <span id="device">Quantum Neural Interface (Probably)</span></p>
+                <p><strong>Last Search:</strong> <span id="search">"How to hack a black hole"</span></p>
+                <p><strong>Wi-Fi Network:</strong> <span id="wifi">Starlink_69420</span></p>
+                <p><strong>ISP:</strong> <span id="isp">Galactic Net Services</span></p>
+                <p><strong>OS:</strong> <span id="os">Windows 11: Space Edition</span></p>
+                <p><strong>Screen Resolution:</strong> <span id="resolution">3840x2160 (8K Ultra HD)</span></p>
+                <p><strong>Secret Shame:</strong> <span id="shame">You still believe in the Moon landing hoax</span></p>
+                <button id="backButton" class="back-button">Return to Safety</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
