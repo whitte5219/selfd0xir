@@ -3,45 +3,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SelfDoxxer</title>
+    <title>SelfDoxxer - The Joke Doxxing Tool</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="background"></div>
-    <div class="container" id="mainContainer">
-        <h1 class="title">SelfDoxxer</h1>
-        <p class="subtitle">Dox yourself or get doxxed</p>
-        <button id="doxButton" class="dox-button">Dox Yourself</button>
-    </div>
-
-    <div id="scanner" class="scanner hidden">
-        <div class="scanner-line"></div>
-        <p class="scanning-text">Scanning your existence...</p>
-    </div>
-
-    <div id="doxResult" class="dox-result hidden">
-        <div class="dox-card">
-            <h2>Your "Doxxed" Data</h2>
-            <div id="doxContent">
-                <p><strong>IP Address:</strong> <span id="ip">Loading...</span></p>
-                <p><strong>Geolocation:</strong> <span id="location">Loading...</span></p>
-                <p><strong>Browser:</strong> <span id="browser">Loading...</span></p>
-                <p><strong>Device:</strong> <span id="device">Loading...</span></p>
-                <p><strong>OS:</strong> <span id="os">Loading...</span></p>
-                <p><strong>Screen Resolution:</strong> <span id="resolution">Loading...</span></p>
-                <p><strong>Last Search:</strong> <span id="search">Loading...</span></p>
-                <p><strong>Wi-Fi Network:</strong> <span id="wifi">Loading...</span></p>
-                <p><strong>Secret Shame:</strong> <span id="shame">Loading...</span></p>
+    <!-- Background Elements -->
+    <div class="stars"></div>
+    <div class="twinkling"></div>
+    <div class="clouds"></div>
+    
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Initial Screen -->
+        <div id="initialScreen" class="screen active">
+            <div class="logo">
+                <i class="fas fa-user-astronaut"></i>
+                <h1 class="main-title">Self<span class="highlight">Doxxer</span></h1>
             </div>
-            <button id="backButton" class="back-button">Return to Void</button>
+            
+            <div class="tagline">
+                <h2>"Dox yourself or get doxxed, that's what we call nonsense"</h2>
+                <div class="pulse-line"></div>
+            </div>
+            
+            <div class="warning">
+                <i class="fas fa-exclamation-triangle"></i>
+                <p>DISCLAIMER: This is a joke website. No real doxxing occurs. All data shown is already available to any website you visit.</p>
+            </div>
+            
+            <button id="doxButton" class="dox-button">
+                <span class="button-text">INITIATE SELF-DOXXING SEQUENCE</span>
+                <span class="button-icon"><i class="fas fa-rocket"></i></span>
+                <div class="button-glow"></div>
+            </button>
+            
+            <div class="instructions">
+                <p><i class="fas fa-info-circle"></i> Click the button above to see what information websites can typically access from your browser</p>
+            </div>
+        </div>
+        
+        <!-- Results Screen -->
+        <div id="resultsScreen" class="screen">
+            <div class="results-header">
+                <h1><i class="fas fa-satellite-dish"></i> DOXXING REPORT <span class="highlight">COMPLETE</span></h1>
+                <p class="subtitle">The following information was retrieved from your connection</p>
+                <div class="scanning-animation">
+                    <div class="scan-line"></div>
+                </div>
+            </div>
+            
+            <div class="doxxing-board">
+                <div class="board-header">
+                    <h2><i class="fas fa-terminal"></i> SECURITY BREACH DETECTED</h2>
+                    <div class="threat-level">
+                        <span class="threat-text">THREAT LEVEL:</span>
+                        <span class="threat-indicator">JOKE</span>
+                    </div>
+                </div>
+                
+                <div class="info-grid">
+                    <!-- Left Column -->
+                    <div class="info-column">
+                        <div class="info-card" data-category="network">
+                            <div class="card-header">
+                                <i class="fas fa-network-wired"></i>
+                                <h3>NETWORK INFORMATION</h3>
+                            </div>
+                            <div class="card-content">
+                                <div class="info-item">
+                                    <span class="info-label">Public IP:</span>
+                                    <span id="ipAddress" class="info-value">Scanning...</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Connection Type:</span>
+                                    <span id="connectionType" class="info-value">Analyzing...</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Online Status:</span>
+                                    <span id="onlineStatus" class="info-value">Checking...</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="info-card" data-category="browser">
+                            <div class="card-header">
+                                <i class="fas fa-window-restore"></i>
+                                <h3>BROWSER DATA</h3>
+                            </div>
+                            <div class="card-content">
+                                <div class="info-item">
+                                    <span class="info-label">Browser:</span>
+                                    <span id="browserName" class="info-value">Detecting...</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Platform:</span>
+                                    <span id="platform" class="info-value">Scanning...</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Language:</span>
+                                    <span id="language" class="info-value">Analyzing...</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Cookies Enabled:</span>
+                                    <span id="cookiesEnabled" class="info-value">Checking...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Column -->
+                    <div class="info-column">
+                        <div class="info-card" data-category="system">
+                            <div class="card-header">
+                                <i class="fas fa-desktop"></i>
+                                <h3>SYSTEM SPECS</h3>
+                            </div>
+                            <div class="card-content">
+                                <div class="info-item">
+                                    <span class="info-label">Screen Resolution:</span>
+                                    <span id="screenResolution" class="info-value">Measuring...</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Color Depth:</span>
+                                    <span id="colorDepth" class="info-value">Calculating...</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">CPU Cores:</span>
+                                    <span id="cpuCores" class="info-value">Detecting...</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Device Memory:</span>
+                                    <span id="deviceMemory" class="info-value">Estimating...</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="info-card" data-category="location">
+                            <div class="card-header">
+                                <i class="fas fa-map-marked-alt"></i>
+                                <h3>LOCATION DATA</h3>
+                            </div>
+                            <div class="card-content">
+                                <div class="info-item">
+                                    <span class="info-label">Geolocation:</span>
+                                    <span id="geolocation" class="info-value">Requesting permission...</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Timezone:</span>
+                                    <span id="timezone" class="info-value">Detecting...</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Local Time:</span>
+                                    <span id="localTime" class="info-value">Synchronizing...</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Location Accuracy:</span>
+                                    <span id="locationAccuracy" class="info-value">Pending...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="final-message">
+                    <p><i class="fas fa-shield-alt"></i> <strong>REMEMBER:</strong> This is just a demonstration of what typical websites can access. Always be cautious about what information you share online!</p>
+                </div>
+                
+                <div class="action-buttons">
+                    <button id="resetButton" class="action-button">
+                        <i class="fas fa-redo"></i> RETURN TO SAFETY
+                    </button>
+                    <button id="shareButton" class="action-button share">
+                        <i class="fas fa-share-alt"></i> SHARE THE JOKE
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
-
-    <footer class="footer">
-        <p>This is a joke website. No real data is collected or displayed.</p>
+    
+    <!-- Footer -->
+    <footer>
+        <p>SelfDoxxer &copy; <span id="currentYear"></span> | A Joke Website for Educational Purposes | <i class="fas fa-heart"></i> Made with humor</p>
     </footer>
-
+    
     <script src="script.js"></script>
 </body>
 </html>
