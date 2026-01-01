@@ -40,16 +40,26 @@ document.getElementById('doxButton').addEventListener('click', () => {
         doxResult.classList.remove('hidden');
         setTimeout(() => {
             doxResult.style.opacity = '1';
-            document.getElementById('ip').textContent = getRandomItem(mockData.ips);
-            document.getElementById('location').textContent = getRandomItem(mockData.locations);
-            document.getElementById('browser').textContent = getRandomItem(mockData.browsers);
-            document.getElementById('device').textContent = getRandomItem(mockData.devices);
-            document.getElementById('search').textContent = getRandomItem(mockData.searches);
-            document.getElementById('wifi').textContent = getRandomItem(mockData.wifis);
-            document.getElementById('isp').textContent = getRandomItem(mockData.isps);
-            document.getElementById('os').textContent = getRandomItem(mockData.oses);
-            document.getElementById('resolution').textContent = getRandomItem(mockData.resolutions);
-            document.getElementById('shame').textContent = getRandomItem(mockData.shames);
+            const fields = document.querySelectorAll('.data-field');
+            fields.forEach((field, index) => {
+                setTimeout(() => {
+                    field.style.opacity = '1';
+                    field.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+
+            setTimeout(() => {
+                document.getElementById('ip').textContent = getRandomItem(mockData.ips);
+                document.getElementById('location').textContent = getRandomItem(mockData.locations);
+                document.getElementById('browser').textContent = getRandomItem(mockData.browsers);
+                document.getElementById('device').textContent = getRandomItem(mockData.devices);
+                document.getElementById('search').textContent = getRandomItem(mockData.searches);
+                document.getElementById('wifi').textContent = getRandomItem(mockData.wifis);
+                document.getElementById('isp').textContent = getRandomItem(mockData.isps);
+                document.getElementById('os').textContent = getRandomItem(mockData.oses);
+                document.getElementById('resolution').textContent = getRandomItem(mockData.resolutions);
+                document.getElementById('shame').textContent = getRandomItem(mockData.shames);
+            }, 500);
         }, 50);
     }, 2000);
 });
