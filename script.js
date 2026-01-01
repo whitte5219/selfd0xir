@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
             scanner.style.display = 'none';
             doxResult.style.display = 'flex';
 
-            // Set mock data with delays for each field
             setTimeout(() => document.getElementById('ip').textContent = "192.168.420.69", 100);
             setTimeout(() => document.getElementById('location').textContent = "Orbiting Jupiter", 200);
             setTimeout(() => document.getElementById('browser').textContent = navigator.userAgent, 300);
