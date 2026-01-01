@@ -3,30 +3,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const scanner = document.getElementById('scanner');
     const doxResult = document.getElementById('doxResult');
     const backButton = document.getElementById('backButton');
+    const mainContainer = document.getElementById('mainContainer');
 
     doxButton.addEventListener('click', () => {
-        document.querySelector('.container').style.display = 'none';
+        mainContainer.style.display = 'none';
         scanner.style.display = 'flex';
 
         setTimeout(() => {
             scanner.style.display = 'none';
-            doxResult.style.display = 'block';
+            doxResult.style.display = 'flex';
 
-            // Fetch harmless data
-            document.getElementById('ip').textContent = "192.168.xxx.xxx (fake)";
-            document.getElementById('location').textContent = "Nowhere, Space";
-            document.getElementById('browser').textContent = navigator.userAgent;
-            document.getElementById('device').textContent = "Unknown Space Device";
-            document.getElementById('resolution').textContent = `${window.screen.width}x${window.screen.height}`;
-            document.getElementById('search').textContent = "How to dox yourself";
-            document.getElementById('wifi').textContent = "Starlink_69420";
-            document.getElementById('os').textContent = navigator.platform;
-            document.getElementById('shame').textContent = "You think the Earth is flat";
+            // Set mock data with delays for each field
+            setTimeout(() => document.getElementById('ip').textContent = "192.168.420.69", 100);
+            setTimeout(() => document.getElementById('location').textContent = "Orbiting Jupiter", 200);
+            setTimeout(() => document.getElementById('browser').textContent = navigator.userAgent, 300);
+            setTimeout(() => document.getElementById('device').textContent = "Quantum Terminal", 400);
+            setTimeout(() => document.getElementById('os').textContent = navigator.platform, 500);
+            setTimeout(() => document.getElementById('resolution').textContent = `${window.screen.width}x${window.screen.height}`, 600);
+            setTimeout(() => document.getElementById('search').textContent = "How to survive a black hole", 700);
+            setTimeout(() => document.getElementById('wifi').textContent = "Starlink_69420", 800);
+            setTimeout(() => document.getElementById('shame').textContent = "You still use Internet Explorer", 900);
         }, 2000);
     });
 
     backButton.addEventListener('click', () => {
         doxResult.style.display = 'none';
-        document.querySelector('.container').style.display = 'flex';
+        mainContainer.style.display = 'flex';
     });
 });
