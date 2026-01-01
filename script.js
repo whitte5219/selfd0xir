@@ -3,102 +3,167 @@ const initialScreen = document.getElementById('initialScreen');
 const resultsScreen = document.getElementById('resultsScreen');
 const doxButton = document.getElementById('doxButton');
 const resetButton = document.getElementById('resetButton');
+const leakButton = document.getElementById('leakButton');
+const leakStatus = document.getElementById('leakStatus');
+const leakSuccess = document.getElementById('leakSuccess');
+
+// Initialize animations
+initAnimations();
 
 // Switch to results screen
 doxButton.addEventListener('click', function() {
-    // Add loading state to button
-    const originalText = this.querySelector('.button-text').textContent;
-    this.querySelector('.button-text').textContent = 'scanning...';
-    this.querySelector('.button-icon').innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+    // Add loading animation to button
+    const buttonText = this.querySelector('.button-text');
+    const buttonIcon = this.querySelector('.button-icon');
+    const originalText = buttonText.textContent;
+    const originalIcon = buttonIcon.innerHTML;
+    
+    buttonText.textContent = 'scanning...';
+    buttonIcon.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
     this.disabled = true;
+    this.style.transform = 'scale(0.95)';
+    
+    // Add particle effect
+    createParticles(this);
     
     // Simulate scanning delay
     setTimeout(() => {
-        // Switch screens with animation
-        initialScreen.classList.remove('active');
+        // Switch screens with smooth animation
+        initialScreen.style.opacity = '0';
+        initialScreen.style.transform = 'translateY(-20px)';
         
         setTimeout(() => {
+            initialScreen.classList.remove('active');
             resultsScreen.classList.add('active');
+            
+            // Reset button state
+            setTimeout(() => {
+                buttonText.textContent = originalText;
+                buttonIcon.innerHTML = originalIcon;
+                doxButton.disabled = false;
+                doxButton.style.transform = '';
+            }, 500);
+            
             // Start gathering information
             gatherInformation();
         }, 600);
-    }, 1200);
+    }, 1500);
 });
 
 // Reset to initial screen
 resetButton.addEventListener('click', function() {
-    resultsScreen.classList.remove('active');
+    // Add animation to button
+    this.style.transform = 'scale(0.95)';
+    createParticles(this);
     
     setTimeout(() => {
-        initialScreen.classList.add('active');
+        resultsScreen.style.opacity = '0';
+        resultsScreen.style.transform = 'translateY(20px)';
         
-        // Reset button state
-        doxButton.querySelector('.button-text').textContent = 'dox yourself';
-        doxButton.querySelector('.button-icon').innerHTML = '<i class="fas fa-satellite"></i>';
-        doxButton.disabled = false;
-    }, 600);
+        setTimeout(() => {
+            resultsScreen.classList.remove('active');
+            initialScreen.classList.add('active');
+            
+            // Reset screen styles
+            setTimeout(() => {
+                resultsScreen.style.opacity = '';
+                resultsScreen.style.transform = '';
+                this.style.transform = '';
+            }, 500);
+        }, 600);
+    }, 300);
+});
+
+// Leak button functionality
+leakButton.addEventListener('click', function() {
+    // Hide leak button and show loading status
+    this.style.opacity = '0';
+    this.style.transform = 'scale(0.9)';
+    this.style.pointerEvents = 'none';
+    
+    setTimeout(() => {
+        this.style.display = 'none';
+        leakStatus.style.display = 'block';
+        
+        // Simulate data leak process
+        setTimeout(() => {
+            leakStatus.style.opacity = '0';
+            leakStatus.style.transform = 'translateY(-10px)';
+            
+            setTimeout(() => {
+                leakStatus.style.display = 'none';
+                leakSuccess.style.display = 'flex';
+                leakSuccess.style.alignItems = 'center';
+                leakSuccess.style.justifyContent = 'center';
+                
+                // Add celebration particles
+                for (let i = 0; i < 20; i++) {
+                    setTimeout(() => createLeakParticles(), i * 100);
+                }
+            }, 500);
+        }, 3000);
+    }, 300);
 });
 
 // Gather and display information
 async function gatherInformation() {
+    // Animate cards appearing
+    const infoCards = document.querySelectorAll('.info-card');
+    
     // Get IP address
     try {
         const ipResponse = await fetch('https://api.ipify.org?format=json');
         const ipData = await ipResponse.json();
-        document.getElementById('ipAddress').textContent = ipData.ip;
+        animateValueChange('ipAddress', ipData.ip);
     } catch (error) {
-        document.getElementById('ipAddress').textContent = 'Not available';
+        animateValueChange('ipAddress', 'Not available');
     }
     
     // Network information
-    document.getElementById('connectionType').textContent = 
-        navigator.connection ? (navigator.connection.effectiveType || 'Unknown') : 'Unknown';
-    document.getElementById('onlineStatus').textContent = navigator.onLine ? 'Online' : 'Offline';
+    animateValueChange('connectionType', 
+        navigator.connection ? (navigator.connection.effectiveType || 'Unknown') : 'Unknown');
+    animateValueChange('onlineStatus', navigator.onLine ? 'Online' : 'Offline');
     
     // Browser information
-    document.getElementById('browserName').textContent = getBrowserName();
-    document.getElementById('platform').textContent = navigator.platform;
-    document.getElementById('language').textContent = navigator.language;
-    document.getElementById('cookiesEnabled').textContent = navigator.cookieEnabled ? 'Yes' : 'No';
+    animateValueChange('browserName', getBrowserName());
+    animateValueChange('platform', navigator.platform);
+    animateValueChange('language', navigator.language);
+    animateValueChange('cookiesEnabled', navigator.cookieEnabled ? 'Yes' : 'No');
     
     // System information
-    document.getElementById('screenResolution').textContent = 
-        `${window.screen.width} × ${window.screen.height}`;
-    document.getElementById('colorDepth').textContent = `${window.screen.colorDepth} bit`;
+    animateValueChange('screenResolution', 
+        `${window.screen.width} × ${window.screen.height}`);
+    animateValueChange('colorDepth', `${window.screen.colorDepth} bit`);
     
     // Time and location
-    document.getElementById('timezone').textContent = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    animateValueChange('timezone', Intl.DateTimeFormat().resolvedOptions().timeZone);
     
     const now = new Date();
-    document.getElementById('localTime').textContent = 
-        `${now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}`;
+    animateValueChange('localTime', 
+        `${now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}`);
     
     // Request geolocation
     if ("geolocation" in navigator) {
-        document.getElementById('geolocation').textContent = 'Requesting...';
-        
         navigator.geolocation.getCurrentPosition(
             (position) => {
                 const lat = position.coords.latitude.toFixed(4);
                 const lon = position.coords.longitude.toFixed(4);
-                document.getElementById('geolocation').textContent = `${lat}, ${lon}`;
+                animateValueChange('geolocation', `${lat}, ${lon}`);
             },
             () => {
-                document.getElementById('geolocation').textContent = 'Denied or unavailable';
+                animateValueChange('geolocation', 'Permission denied');
             },
             { timeout: 8000 }
         );
     } else {
-        document.getElementById('geolocation').textContent = 'Not supported';
+        animateValueChange('geolocation', 'Not supported');
     }
     
-    // Add staggered animations to info cards
-    const infoCards = document.querySelectorAll('.info-card');
+    // Animate cards one by one
     infoCards.forEach((card, index) => {
         setTimeout(() => {
-            card.style.opacity = '1';
-            card.style.transform = 'translateY(0)';
-        }, index * 100);
+            card.classList.add('reveal');
+        }, index * 200 + 500);
     });
 }
 
@@ -117,20 +182,129 @@ function getBrowserName() {
     return "Unknown Browser";
 }
 
-// Initialize card animations
-document.querySelectorAll('.info-card').forEach(card => {
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(10px)';
-    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-});
-
-// Add a subtle hover effect to info cards
-document.querySelectorAll('.info-card').forEach(card => {
-    card.addEventListener('mouseenter', function() {
-        this.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.3)';
-    });
+// Animate value changes
+function animateValueChange(elementId, newValue) {
+    const element = document.getElementById(elementId);
+    const oldValue = element.textContent;
     
-    card.addEventListener('mouseleave', function() {
-        this.style.boxShadow = 'none';
+    element.style.opacity = '0.5';
+    element.style.transform = 'translateY(5px)';
+    
+    setTimeout(() => {
+        element.textContent = newValue;
+        element.style.opacity = '1';
+        element.style.transform = 'translateY(0)';
+    }, 300);
+}
+
+// Initialize animations
+function initAnimations() {
+    // Add hover effect to info cards
+    document.querySelectorAll('.info-card').forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px) scale(0.95)';
+        card.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
     });
-});
+}
+
+// Create particle effect
+function createParticles(element) {
+    const rect = element.getBoundingClientRect();
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
+    
+    for (let i = 0; i < 12; i++) {
+        const particle = document.createElement('div');
+        particle.style.position = 'fixed';
+        particle.style.width = '6px';
+        particle.style.height = '6px';
+        particle.style.backgroundColor = i % 2 === 0 ? '#4fc3f7' : '#ff4081';
+        particle.style.borderRadius = '50%';
+        particle.style.pointerEvents = 'none';
+        particle.style.zIndex = '9999';
+        particle.style.left = `${x}px`;
+        particle.style.top = `${y}px`;
+        
+        document.body.appendChild(particle);
+        
+        // Animate particle
+        const angle = Math.random() * Math.PI * 2;
+        const speed = 2 + Math.random() * 4;
+        const vx = Math.cos(angle) * speed;
+        const vy = Math.sin(angle) * speed;
+        
+        let opacity = 1;
+        let size = 6;
+        const animate = () => {
+            opacity -= 0.03;
+            size -= 0.1;
+            particle.style.opacity = opacity;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.left = `${parseFloat(particle.style.left) + vx}px`;
+            particle.style.top = `${parseFloat(particle.style.top) + vy}px`;
+            
+            if (opacity > 0 && size > 0) {
+                requestAnimationFrame(animate);
+            } else {
+                if (particle.parentNode) {
+                    document.body.removeChild(particle);
+                }
+            }
+        };
+        
+        animate();
+    }
+}
+
+// Create leak celebration particles
+function createLeakParticles() {
+    const colors = ['#4caf50', '#8bc34a', '#cddc39', '#ffeb3b'];
+    const board = document.querySelector('.doxxing-board');
+    const rect = board.getBoundingClientRect();
+    
+    for (let i = 0; i < 5; i++) {
+        const particle = document.createElement('div');
+        particle.style.position = 'fixed';
+        particle.style.width = '8px';
+        particle.style.height = '8px';
+        particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        particle.style.borderRadius = '50%';
+        particle.style.pointerEvents = 'none';
+        particle.style.zIndex = '9999';
+        particle.style.left = `${rect.left + Math.random() * rect.width}px`;
+        particle.style.top = `${rect.top + Math.random() * rect.height}px`;
+        
+        document.body.appendChild(particle);
+        
+        // Animate particle
+        const vx = (Math.random() - 0.5) * 8;
+        const vy = (Math.random() - 0.5) * 8 - 5;
+        
+        let opacity = 1;
+        const animate = () => {
+            opacity -= 0.02;
+            particle.style.opacity = opacity;
+            particle.style.left = `${parseFloat(particle.style.left) + vx}px`;
+            particle.style.top = `${parseFloat(particle.style.top) + vy}px`;
+            vy += 0.2; // gravity
+            
+            if (opacity > 0) {
+                requestAnimationFrame(animate);
+            } else {
+                if (particle.parentNode) {
+                    document.body.removeChild(particle);
+                }
+            }
+        };
+        
+        animate();
+    }
+}
+
+// Add console message
+console.log(
+    "%c🚀 SelfDoxxer - A Space-Themed Joke 🚀\n%cThis is a fun website showing what information websites can access.",
+    "color: #4fc3f7; font-size: 14px; font-weight: bold;",
+    "color: #b3e5fc; font-size: 11px;"
+);
