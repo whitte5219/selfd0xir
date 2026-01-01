@@ -9,33 +9,39 @@
 </head>
 <body>
     <div class="background"></div>
-    <div class="container">
-        <h1 class="title">SelfDoxxer</h1>
-        <p class="subtitle">Dox yourself or get doxxed, that's what we call nonsense</p>
-        <button id="doxButton" class="dox-button">Dox Yourself</button>
-        <div id="scanner" class="scanner hidden">
-            <div class="scanner-line"></div>
-            <p class="scanning-text">Scanning your existence...</p>
-        </div>
-        <div id="doxResult" class="dox-result hidden">
-            <div class="dox-card">
-                <h2>Your "Doxxed" Data</h2>
+    <div class="container" id="mainContainer">
+        <h1 class="title fade-in">SelfDoxxer</h1>
+        <p class="subtitle fade-in">Dox yourself or get doxxed</p>
+        <button id="doxButton" class="dox-button fade-in">Dox Yourself</button>
+    </div>
+
+    <div id="scanner" class="scanner hidden">
+        <div class="scanner-line"></div>
+        <p class="scanning-text">Scanning your existence...</p>
+    </div>
+
+    <div id="doxResult" class="dox-result hidden">
+        <div class="dox-card">
+            <h2 class="fade-in">Your "Doxxed" Data</h2>
+            <div id="doxContent">
                 <p><strong>IP Address:</strong> <span id="ip">Loading...</span></p>
                 <p><strong>Geolocation:</strong> <span id="location">Loading...</span></p>
                 <p><strong>Browser:</strong> <span id="browser">Loading...</span></p>
                 <p><strong>Device:</strong> <span id="device">Loading...</span></p>
+                <p><strong>OS:</strong> <span id="os">Loading...</span></p>
                 <p><strong>Screen Resolution:</strong> <span id="resolution">Loading...</span></p>
                 <p><strong>Last Search:</strong> <span id="search">Loading...</span></p>
                 <p><strong>Wi-Fi Network:</strong> <span id="wifi">Loading...</span></p>
-                <p><strong>OS:</strong> <span id="os">Loading...</span></p>
                 <p><strong>Secret Shame:</strong> <span id="shame">Loading...</span></p>
-                <button id="backButton" class="back-button">Return to Void</button>
             </div>
+            <button id="backButton" class="back-button fade-in">Return to Void</button>
         </div>
-        <footer class="footer">
-            <p>This is a joke website. No real data is collected or displayed. Enjoy the void.</p>
-        </footer>
     </div>
+
+    <footer class="footer fade-in">
+        <p>This is a joke website. No real data is collected or displayed.</p>
+    </footer>
+
     <script src="script.js"></script>
 </body>
 </html>
